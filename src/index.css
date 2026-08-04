@@ -19,8 +19,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+  --font-sans: var(--app-font-sans, "Geist"), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--app-font-mono, "Geist Mono"), ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
 }
 
 :root {

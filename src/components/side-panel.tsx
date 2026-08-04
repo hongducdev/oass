@@ -30,7 +30,7 @@ export function SidePanel({ mode, settings, onSettingsChange, onClose }: SidePan
 
   async function saveSettings() {
     try {
-      localStorage.setItem("oass.settings", JSON.stringify({ endpoint: draft.endpoint, model: draft.model }))
+      localStorage.setItem("oass.settings", JSON.stringify({ endpoint: draft.endpoint, model: draft.model, uiFont: draft.uiFont, monoFont: draft.monoFont }))
       if (isTauri()) await invoke("save_api_key", { apiKey: draft.apiKey })
       onSettingsChange(draft)
       setStatus("Settings saved")
@@ -161,6 +161,61 @@ export function SidePanel({ mode, settings, onSettingsChange, onClose }: SidePan
             <label className="block space-y-2">
               <span className="text-xs font-medium">Chat model</span>
               <Input value={draft.model} onChange={(event) => setDraft({ ...draft, model: event.target.value })} />
+            </label>
+            <label className="block space-y-2">
+              <span className="text-xs font-medium">UI font</span>
+              <select
+                value={draft.uiFont}
+                onChange={(event) => setDraft({ ...draft, uiFont: event.target.value })}
+                className="w-full rounded-lg border border-border bg-secondary px-3 py-2 text-sm text-foreground outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/15"
+              >
+                <optgroup label="Bundled">
+                  <option>Geist</option>
+                </optgroup>
+                <optgroup label="System">
+                  <option>Segoe UI</option>
+                  <option>Segoe UI Variable Text</option>
+                  <option>Segoe UI Variable Display</option>
+                  <option>Calibri</option>
+                  <option>Tahoma</option>
+                  <option>Verdana</option>
+                  <option>Trebuchet MS</option>
+                  <option>Arial</option>
+                </optgroup>
+                <optgroup label="Other">
+                  <option>Inter</option>
+                  <option>system-ui</option>
+                </optgroup>
+              </select>
+            </label>
+            <label className="block space-y-2">
+              <span className="text-xs font-medium">Mono font</span>
+              <select
+                value={draft.monoFont}
+                onChange={(event) => setDraft({ ...draft, monoFont: event.target.value })}
+                className="w-full rounded-lg border border-border bg-secondary px-3 py-2 text-sm text-foreground outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/15"
+              >
+                <optgroup label="Bundled">
+                  <option>Geist Mono</option>
+                </optgroup>
+                <optgroup label="System">
+                  <option>Cascadia Code</option>
+                  <option>Cascadia Mono</option>
+                  <option>Consolas</option>
+                  <option>Lucida Console</option>
+                  <option>Courier New</option>
+                  <option>Iosevka Term</option>
+                  <option>Paper Mono</option>
+                  <option>SpaceMono Nerd Font</option>
+                  <option>SpaceMono Nerd Font Mono</option>
+                </optgroup>
+                <optgroup label="Other">
+                  <option>JetBrains Mono</option>
+                  <option>Fira Code</option>
+                  <option>Hack</option>
+                  <option>monospace</option>
+                </optgroup>
+              </select>
             </label>
             {status && <p className="text-xs text-emerald-300">{status}</p>}
             <Button onClick={() => void saveSettings()}>

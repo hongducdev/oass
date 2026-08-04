@@ -9,13 +9,14 @@ import { TerminalPane } from "@/components/terminal-pane"
 import { TitleBar } from "@/components/title-bar"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { cn } from "@/lib/utils"
 import type { AppSettings, Session } from "@/types"
 
 const defaultSettings: AppSettings = {
   endpoint: "http://localhost:20128/v1",
   model: "gpt-4.1-mini",
   apiKey: "",
+  uiFont: "Geist",
+  monoFont: "Geist Mono",
 }
 
 function makeSession(index: number): Session {
@@ -39,6 +40,12 @@ export function App() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
 
   const activeSession = useMemo(() => sessions.find((session) => session.id === activeId) ?? sessions[0], [sessions, activeId])
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty("--app-font-sans", `"${settings.uiFont}"`)
+    root.style.setProperty("--app-font-mono", `"${settings.monoFont}"`)
+  }, [settings.uiFont, settings.monoFont])
 
   useEffect(() => {
     if (!("__TAURI_INTERNALS__" in window)) return

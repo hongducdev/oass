@@ -13,6 +13,8 @@ export type AppSettings = {
   endpoint: string
   model: string
   apiKey: string
+  uiFont: string
+  monoFont: string
 }
 
 export type TerminalOutput = {
