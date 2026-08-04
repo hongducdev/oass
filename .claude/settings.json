@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(sh)",
+      "Bash(sh -)",
+      "Bash(bash)",
+      "Bash(bash -)",
+      "Bash(zsh)",
+      "Bash(zsh -)",
+      "Bash(npx --yes *)",
+      "Bash(npx -y *)",
+      "Bash(npx * --yes *)",
+      "Bash(npx * -y *)",
+      "Bash(npm publish:*)",
+      "Bash(migrate *)",
+      "Bash(docker compose up*)",
+      "Bash(docker-compose up*)"
+    ]
+  },
+  "skillOverrides": {
+    "autoresearch-coding": "user-invocable-only",
+    "vibekit-init": "user-invocable-only"
+  }
+}

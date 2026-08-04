@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(ls)",
+      "Shell(cat)",
+      "Shell(head)",
+      "Shell(tail)",
+      "Shell(wc)",
+      "Shell(rg)",
+      "Shell(grep)",
+      "Shell(find)",
+      "Shell(git:status*)",
+      "Shell(git:log*)",
+      "Shell(git:diff*)",
+      "Shell(git:show*)",
+      "Shell(git:branch*)"
+    ],
+    "deny": [
+      "Shell(rm)",
+      "Shell(sh)",
+      "Shell(bash)",
+      "Shell(zsh)",
+      "Shell(git:push*)",
+      "Shell(git:reset --hard*)",
+      "Shell(npx:--yes*)",
+      "Shell(npx:-y*)",
+      "Shell(npm:publish*)",
+      "Shell(migrate)",
+      "Shell(docker:compose up*)",
+      "Shell(docker-compose:up*)"
+    ]
+  }
+}

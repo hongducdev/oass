@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(cmd:*)",
+      "powershell"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

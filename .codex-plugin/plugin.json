@@ -1,0 +1,10 @@
+{
+  "name": "mvck-agent-ter",
+  "version": "0.5.7",
+  "description": "MVCK vibe coding skills for the agent-ter project.",
+  "author": {
+    "name": "MVCK (agent-ter)"
+  },
+  "license": "MIT",
+  "skills": "./.vibekit/skills/"
+}

@@ -1,0 +1,110 @@
+# Minimal Vibe Coding Kit backbone. See .vibekit/docs/BACKBONE_REFERENCE.md for details.
+version: 2
+meta:
+  template_status: initialized
+  initialized_at: 2026-05-27T01:36:21.898Z
+  template_source: minimal-vibe-coding-kit
+  schema_version: 3
+  init_runbook: .vibekit/init/FIRST_TIME_INIT.md
+  init_done_marker: .vibekit/INIT_DONE
+
+project:
+  name: oass
+  description: "Windows terminal desktop app built with Tauri 2, Rust, React, Tailwind CSS, shadcn/ui, xterm.js, and 9router chat."
+  type: desktop-app
+  primary_language: typescript
+  package_manager: npm
+  mode: brownfield
+  prd: none
+  context: none
+
+paths:
+  root: .
+  apps:
+    - .
+  source: [src/, src-tauri/src/]
+  tests: [src-tauri/src/lib.rs]
+  docs: [BUILD_REPORT.md, .vibekit/docs/]
+  generated: [node_modules/, dist/, src-tauri/target/, build/, coverage/]
+
+conventions:
+  review_required_before_write: true
+  scope: repo
+  naming:
+    files: lowercase
+    directories: lowercase
+    symbols: not-detected
+    evidence:
+      - files lowercase: 1
+      - files kebab-case: 1
+      - dirs lowercase: 9
+  architecture:
+    detected: [tauri, rust-backend, react-frontend, shadcn-ui]
+    rule: "Keep native capabilities in src-tauri, UI state and composition in src, and reusable primitives in src/components/ui. Ask before adding another desktop or frontend framework."
+  resources:
+    detected_asset_roots: [src-tauri/icons/, assets/]
+    detected_registries: [components.json]
+    rule: "Reuse shadcn/ui primitives and the existing Tauri icon and asset roots before introducing new resource systems."
+  localization:
+    detected_catalogs: []
+    detected_accessors: []
+    rule: "No localization convention was detected; follow nearby copy patterns and ask before introducing a project-wide i18n layer."
+  custom_rules:
+    - Add team-specific rules here during init review; future agents must follow them.
+    - Use path-sensitive-shell-safety before editing shell/deploy/installer/repair logic that joins remote base paths, repo folders, checkout paths, or destructive commands such as rm/mv/cp/rsync/find/git cleanup.
+    - Writing style: no emoji and no em/en dashes in generated prose unless explicitly requested; keep existing characters in files whose established style uses them. See .cursor/rules/050-writing-style.mdc.
+    - Response format: lead with the outcome; use decision tables (Option, What it does, Cost, Risk, Recommended) when the user must choose; end multi-step work with a Done / Next / Decision needed status block. See .claude/rules/response-format.md.
+    - Proportional effort: triage tasks as trivial/small/medium/large and match process weight; score the visual/e2e gate 0-6 and require user approval before visual-design-loop or e2e runs. See .claude/rules/proportional-effort.md.
+    - README dedication lines in README.md, docs/README.vi.md, docs/README.zh-CN.md, and docs/README.ja.md keep the author's Vietnam flag emoji; user-authored content, exempt from the writing-style emoji rule.
+
+commands:
+  install: npm install
+  test: npm test
+  lint: null
+  typecheck: npm test
+  build: npm run build
+  validate: npm test
+
+policy:
+  default_branch: main
+  branch_naming: "feat/<short-topic>"
+  commit_style: conventional
+  editable_paths: [.]
+  protected_paths:
+    - .git/
+    - .env*
+    - "**/*secret*"
+    - "**/*token*"
+    - "**/migrations/**"
+    - "**/node_modules/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/coverage/**"
+    - "**/*lock*"
+
+agent_surfaces:
+  claude: .claude/
+  cursor: .cursor/
+  codex: .agents/
+  codex_plugin: .codex-plugin/plugin.json
+  grok: .grok/
+  kimi: .kimi-code/
+  shared_skills: .vibekit/skills/
+  shared_commands: .vibekit/commands/
+
+automation:
+  autoresearch:
+    results_file: results.tsv
+    logs_dir: .autoresearch/logs
+    default_budget: 3
+    default_timeout_seconds: 600
+  daily_enhance:
+    report_dir: .vibekit/reports
+    write_mode: propose_only
+  finalize:
+    cleanup_dir: _vibekit-cleanup
+    marker: .vibekit/FINALIZE_DONE
+    one_time_files: [.vibekit/init/FIRST_TIME_INIT.md, .vibekit/init/FIRST_PROMPT.md, .vibekit/init/PUSH_TO_GITHUB.md, .vibekit/init/CLAUDE-template.md]
+  security:
+    probe: node .vibekit/scripts/agentshield-probe.mjs .
+    scan: npx ecc-agentshield scan --path . --format text --min-severity medium

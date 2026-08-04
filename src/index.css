@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #0e0e12;
+  --foreground: #f4f4f7;
+  --card: #17171d;
+  --card-foreground: #f4f4f7;
+  --primary: #8b7cff;
+  --primary-foreground: #ffffff;
+  --secondary: #24242c;
+  --secondary-foreground: #ececf2;
+  --muted: #1d1d24;
+  --muted-foreground: #9c9ca8;
+  --accent: #292933;
+  --accent-foreground: #f8f8fb;
+  --border: #303039;
+  --input: #373741;
+  --ring: #8b7cff;
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  font-family: "Geist", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--background);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.terminal-canvas .xterm {
+  height: 100%;
+  padding: 14px 16px;
+}
+
+.terminal-canvas .xterm-viewport {
+  background: transparent !important;
+  scrollbar-color: #3d3d49 transparent;
+  scrollbar-width: thin;
+}
+
+.terminal-canvas .xterm-screen {
+  width: 100% !important;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.panel-in {
+  animation: panel-in 140ms ease-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 25%,
+    var(--secondary) 50%,
+    var(--accent) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

@@ -1,0 +1,14 @@
+---
+name: "source-command-security-scan"
+description: "Use the `agentshield-security-review` skill. Run read-only probe first, then AgentShield scan if available. Do not run hooks or MCP servers."
+---
+
+# source-command-security-scan
+
+Use this skill when the user asks to run the migrated source command `security-scan`.
+
+## Command Template
+
+# security-scan
+
+Use the `agentshield-security-review` skill. Run read-only probe first, then AgentShield scan if available. Do not run hooks or MCP servers.
